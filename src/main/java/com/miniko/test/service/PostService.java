@@ -7,26 +7,29 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+//Funções que trabalham com os posts no repositório (banco de dados)
 @Service
 public class PostService {
+
     private final PostRepository postRepository;
 
     public PostService(PostRepository postRepository) {
         this.postRepository = postRepository;
     }
 
+    //Retorna todos os posts
     public List<Post> getAllPosts() {
         return postRepository.findAll();
     }
-
+    //Retorna o post com um id específico
     public Optional<Post> getPostById(Long id) {
         return postRepository.findById(id);
     }
-
+    //Cria um post no repositório
     public Post createPost(Post post) {
         return postRepository.save(post);
     }
-
+    //Atualiza um post no repositório
     public Post updateAccount(Long id, Post updatePost) {
         Optional<Post> existingPost = postRepository.findById(id);
         if (existingPost.isPresent()) {
@@ -38,7 +41,7 @@ public class PostService {
         }
         return null;
     }
-
+    //Deleta um post no repositório
     public boolean deleteAccount(Long id) {
         Optional<Post> existingPost = postRepository.findById(id);
         if (existingPost.isPresent()) {
@@ -47,7 +50,7 @@ public class PostService {
         }
         return false;
     }
-
+    //Retorna todos os posts com o mesmo id de conta (mesmo autor)
     public List<Post> getAllPostByAccountId(Long id) {
         return postRepository.findByAccountID(id);
     }

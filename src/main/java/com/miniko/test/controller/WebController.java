@@ -9,13 +9,13 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+//Responsável por renderizar as páginas do site
 @Controller
 public class WebController {
     @GetMapping("/login")
     public String renderLogin(Model model) {
         return "login";
     }
-
     @GetMapping("/registry")
     public String renderRegistry(Model model) {
         return "registry";

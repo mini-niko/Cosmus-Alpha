@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+//API para os posts
 @RestController
 @RequestMapping("api/posts")
 public class PostController {
@@ -17,16 +18,16 @@ public class PostController {
         this.postService = postService;
     }
 
-    @GetMapping
-    public List<Post> getAllPosts() {
-        return postService.getAllPosts();
-    }
+//    Desativado por questões de segurança (retorna todos os posts existentes)
+//    @GetMapping
+//    public List<Post> getAllPosts() {
+//        return postService.getAllPosts();
+//    }
 
     @GetMapping("/find-by-user")
     public List<Post> findPostByAccount(@RequestParam Long accountId) {
         return postService.getAllPostByAccountId(accountId);
     }
-
     @PostMapping("/create")
     public Post createPost(@RequestBody Post post) {
         return postService.createPost(post);

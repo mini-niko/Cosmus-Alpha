@@ -8,8 +8,9 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 import java.util.UUID;
 
+//Responsável por fazer a conexão do Service ao repositório (banco de dados)
 public interface PostRepository extends JpaRepository<Post, Long> {
-
+    //Query em SQL para encontrar todos os posts com o mesmo id de conta, como parâmetro
     @Query("SELECT p FROM Post p WHERE p.accountId = :accountId")
     List<Post> findByAccountID(@Param("accountId") Long accountId);
 }
