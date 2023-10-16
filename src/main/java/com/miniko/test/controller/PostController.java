@@ -28,8 +28,4 @@ public class PostController {
     public List<Post> findPostByAccount(@RequestParam Long accountId) {
         return postService.getAllPostByAccountId(accountId);
     }
-    @PostMapping("/create")
-    public Post createPost(@RequestBody Post post) {
-        return postService.createPost(post);
-    }
 }

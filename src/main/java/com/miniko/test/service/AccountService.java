@@ -54,11 +54,14 @@ public class AccountService {
     }
     //Encontra uma conta por seu email
     public Account findAccountByEmail(String email) {
-        Account account = accountRepository.findAccountByEmail(email);
-        return account;
+        return accountRepository.findAccountByEmail(email);
     }
     //Encontra uma conta por seu nome
     public Account findAccountByName(String name) {
-        return accountRepository.findAccountsByName(name);
+        return accountRepository.findAccountByName(name);
+    }
+    //Encontra uma conta por seu nome e senha
+    public Account findAccountByEmailAndPassword(String email, String password) {
+        return accountRepository.findAccountByEmailAndPassword(email, password);
     }
 }

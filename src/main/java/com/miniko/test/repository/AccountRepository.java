@@ -17,5 +17,9 @@ public interface AccountRepository extends JpaRepository<Account, Long> {
 
     //Query em SQL para encontrar uma conta com um nome de parâmetro
     @Query("SELECT a FROM Account a WHERE a.name = :name")
-    Account findAccountsByName(@Param("name") String name);
+    Account findAccountByName(@Param("name") String name);
+
+    //Query em SQL para encontrar uma conta com um nome e senha de parâmetro
+    @Query("SELECT a FROM Account a WHERE a.email = :email AND a.password = :password")
+    Account findAccountByEmailAndPassword(@Param("email") String email, @Param("password") String password);
 }
