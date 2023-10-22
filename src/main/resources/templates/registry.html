@@ -17,7 +17,7 @@
                 <h1>Cadastro</h1>
             </div>
             <hr class="mx-3 my-2">
-            <form method="post" th:object="${account}">
+            <form method="post" th:object="${user}">
                 <div class="pt-1 card-body d-flex flex-column">
                     <div class="form-group">
                         <label for="name">Nome</label>
@@ -46,7 +46,7 @@
         </div>
     </div>
 
-    <script src="../static/js/brutopia.js"></script>
+    <script src="js/brutopia.js"></script>
     <script>
         var verifyFields = {
             name(input) {
@@ -68,7 +68,7 @@
 
                 input.readOnly = true
 
-                fetch(`api/accounts/email-used?email=` + value).then(async (response) => {
+                fetch(`api/users/email-used?email=` + value).then(async (response) => {
 
                     input.readOnly = false
 

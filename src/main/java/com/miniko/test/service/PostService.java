@@ -22,7 +22,7 @@ public class PostService {
         return postRepository.findAll();
     }
     //Retorna o post com um id específico
-    public Optional<Post> getPostById(Long id) {
+    public Optional<Post> getPostById(String id) {
         return postRepository.findById(id);
     }
     //Cria um post no repositório
@@ -30,19 +30,18 @@ public class PostService {
         return postRepository.save(post);
     }
     //Atualiza um post no repositório
-    public Post updateAccount(Long id, Post updatePost) {
+    public Post updateUser(String id, Post updatePost) {
         Optional<Post> existingPost = postRepository.findById(id);
         if (existingPost.isPresent()) {
             Post post = existingPost.get();
             post.setTitle(updatePost.getTitle());
-            post.setComments(updatePost.getComments());
-            post.setAccountId(updatePost.getAccountId());
+            post.setUserId(updatePost.getUserId());
             return postRepository.save(post);
         }
         return null;
     }
     //Deleta um post no repositório
-    public boolean deleteAccount(Long id) {
+    public boolean deleteUser(String id) {
         Optional<Post> existingPost = postRepository.findById(id);
         if (existingPost.isPresent()) {
             postRepository.delete(existingPost.get());
@@ -51,7 +50,7 @@ public class PostService {
         return false;
     }
     //Retorna todos os posts com o mesmo id de conta (mesmo autor)
-    public List<Post> getAllPostByAccountId(Long id) {
-        return postRepository.findByAccountID(id);
+    public List<Post> getAllPostByUserId(Long id) {
+        return postRepository.findByUserId(id);
     }
 }

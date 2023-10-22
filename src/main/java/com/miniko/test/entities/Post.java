@@ -6,32 +6,29 @@ import jakarta.validation.constraints.NotBlank;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
+@Entity(name = "posts")
+@Table(name = "posts")
 public class Post {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private String id;
 
     @NotBlank(message = "")
-    private Long accountId;
+    private String userId;
 
     private String title;
 
-    @ElementCollection
-    @CollectionTable(name = "comment")
-    private List<String> comments = new ArrayList<String>();
-
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public Long getAccountId() {
-        return accountId;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setAccountId(Long accountId) {
-        this.accountId = accountId;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public String getTitle() {
@@ -40,13 +37,5 @@ public class Post {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public List<String> getComments() {
-        return comments;
-    }
-
-    public void setComments(List<String> comments) {
-        this.comments = comments;
     }
 }

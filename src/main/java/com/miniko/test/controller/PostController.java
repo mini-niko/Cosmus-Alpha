@@ -25,7 +25,7 @@ public class PostController {
 //    }
 
     @GetMapping("/find-by-user")
-    public List<Post> findPostByAccount(@RequestParam Long accountId) {
-        return postService.getAllPostByAccountId(accountId);
+    public List<Post> findPostByUser(@RequestParam Long userId) {
+        return postService.getAllPostByUserId(userId);
     }
 }
