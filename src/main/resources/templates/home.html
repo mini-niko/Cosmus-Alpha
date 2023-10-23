@@ -13,7 +13,32 @@
         <h1 class="display-4">Cosmus</h1>
         <div class="d-flex align-items-center justify-content-between">
             <h4 class="me-4">Seja bem vindo <span th:text="${userName}">user</span>!</h4>
-            <img src="img/user-solid.svg" height="64">
+            <img src="img/user-solid.svg" height="64" id="avatar-pic" class="avatar" for="input-image" data-toggle="modal" data-target="#enviararquivo">
+
+            <!-- Modal -->
+            <div class="modal fade" id="enviararquivo" tabindex="-1" role="dialog" aria-labelledby="TituloModalCentralizado" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="TituloModalCentralizado">Título do modal</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form action="ProfilePic">
+                            <div class="modal-body">
+                                <input type="file" accept="image/jpeg, image/png, image/jpg" id="input-image">
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                                <button type="submit" class="btn btn-primary">Salvar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
         </div>
     </header>
 
