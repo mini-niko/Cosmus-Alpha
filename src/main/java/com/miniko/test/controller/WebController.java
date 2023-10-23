@@ -81,7 +81,6 @@ public class WebController {
     public ModelAndView loginPost(LoginDTO userLogin, HttpSession httpSession) {
         ModelAndView mv = new ModelAndView();
 
-        System.out.println(userLogin);
         ResponseEntity responseEntity = apiUserController.login(userLogin);
 
         if(responseEntity.getStatusCode() == HttpStatus.OK) {
