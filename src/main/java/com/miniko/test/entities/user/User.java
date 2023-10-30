@@ -25,8 +25,8 @@ public class User implements UserDetails {
     private String email;
     @Size(min = 8, message = "Sua senha deve conter, no mínimo 8 caracteres!")
     private String password;
-
     private UserRole role;
+    private String avatar;
 
     public String getId() {
         return id;
@@ -54,6 +54,22 @@ public class User implements UserDetails {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public UserRole getRole() {
+        return role;
+    }
+
+    public void setRole(UserRole role) {
+        this.role = role;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 
     public User(String name, String email, String password, UserRole role) {

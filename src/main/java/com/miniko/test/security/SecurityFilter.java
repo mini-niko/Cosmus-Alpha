@@ -1,6 +1,7 @@
 package com.miniko.test.security;
 
 import com.miniko.test.entities.user.User;
+import com.miniko.test.entities.user.UserDTO;
 import com.miniko.test.service.UserService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -41,8 +42,8 @@ public class SecurityFilter extends OncePerRequestFilter {
 
     private String recoverToken(HttpServletRequest request) {
         HttpSession httpSession = request.getSession();
-        Object tokenObject = httpSession.getAttribute("userToken");
-        if(tokenObject != null) return tokenObject.toString();
+        UserDTO userDTO = (UserDTO) httpSession.getAttribute("user");
+        if(userDTO != null) return userDTO.token().toString();
 
         return null;
     }

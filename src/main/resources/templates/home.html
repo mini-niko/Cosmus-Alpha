@@ -5,53 +5,118 @@
     <title>Cosmus</title>
 
     <link rel="icon" type="image/png" href="img/favicon.png">
+
     <link rel="stylesheet" href="css/brutopia.css">
+    <link rel="stylesheet" href="css/style.css">
+
 </head>
 <body class="bg-light-info p-0">
 
+    <!--  Header  -->
     <header class="card m-2 p-3 d-flex justify-content-between flex-row align-items-center">
         <h1 class="display-4">Cosmus</h1>
         <div class="d-flex align-items-center justify-content-between">
-            <h4 class="me-4">Seja bem vindo <span th:text="${userName}">user</span>!</h4>
-            <img src="img/user-solid.svg" height="64" id="avatar-pic" class="avatar" for="input-image" data-toggle="modal" data-target="#enviararquivo">
+            <div th:if="${user != null}"><h4 class="me-3" th:text="${'Seja bem vindo ' + user.name}"></h4></div>
 
-            <!-- Modal -->
-            <div class="modal fade" id="enviararquivo" tabindex="-1" role="dialog" aria-labelledby="TituloModalCentralizado" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="TituloModalCentralizado">Título do modal</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
+            <!-- Menu Dropdown com a imagem -->
+            <div th:if="${user != null}">
+                <div th:if="${user.avatar == null}">
+                    <div class="dropdown">
+                        <img src="img/user-solid.svg" height="75" width="75" class="m-0 avatar dropdown-toggle rounded-circle border border-dark border-3 hover-clickable" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <div class="dropdown-menu dropdown-menu-end me-1 mt-4">
+                            <button class="dropdown-item" data-toggle="modal" data-target="#avatarModal">Trocar Avatar</button>
+                            <hr class="dropdown-divider">
+                            <a href="/logout" class="dropdown-item">Logout</a>
                         </div>
-                        <form action="ProfilePic">
-                            <div class="modal-body">
-                                <input type="file" accept="image/jpeg, image/png, image/jpg" id="input-image">
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                                <button type="submit" class="btn btn-primary">Salvar</button>
-                            </div>
-                        </form>
+                    </div>
+                </div>
+                <div th:if="${user.avatar != null}">
+                    <div class="dropdown">
+                        <img th:src="@{'/img/avatar/' + ${user.avatar}}" id="avatar-pic" height="75" width="75" class="m-0 avatar dropdown-toggle rounded-circle border border-dark border-3 hover-clickable" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <div class="dropdown-menu dropdown-menu-end me-1 mt-4">
+                            <button class="dropdown-item" data-toggle="modal" data-target="#avatarModal">Trocar Avatar</button>
+                            <hr class="dropdown-divider">
+                            <a href="/logout" class="dropdown-item">Logout</a>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            </section>
+            <!-- Modal para trocar avatar -->
+            <div class="modal fade" id="avatarModal" tabindex="-1" role="dialog" aria-labelledby="avatarModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="avatarModalLabel">Escolha o seu avatar</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Sair">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="d-flex justify-content-center flex-row gap-3 flex-wrap">
+                                <div th:each="imagem : ${imagesName}">
+                                    <img th:src="@{'/img/avatar/' + ${imagem}}" class="avatarSelect border rounded-circle border-3 border-primary hover-clickable" height="75" width="75">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                            <button id="sendAvatar" type="button" class="btn btn-success">Salvar mudanças</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
         </div>
         </div>
     </header>
 
-    <main>
-
-    </main>
-    <footer>
-
-    </footer>
     <script src="js/brutopia.js"></script><script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script>
+        var imgs = document.querySelectorAll(".avatarSelect")
+        var imgSelected;
+
+        imgs.forEach(img =>
+            img.addEventListener("click", () => {
+                imgSelected = img.src.split("/")
+                imgSelected = imgSelected[imgSelected.length - 1]
+
+                img.classList.add("border-dark")
+                img.classList.remove("border-primary")
+
+                imgs.forEach(imgNonSelected => {
+                    if(imgNonSelected != img) {
+                        imgNonSelected.classList.remove("border-dark")
+                    }
+                })
+            })
+        )
+
+        document.getElementById("sendAvatar").addEventListener(
+            "click", () => {
+                if(imgSelected) {
+                    let host =
+                        window.location.href.startsWith("https") ?
+                            `https://${window.location.host}` :
+                            `http://${window.location.host}`
+                    fetch(`${host}/change-avatar`, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({ "avatar": imgSelected.toString() })
+                    })
+                        .then(response => {
+                            if(response.ok) {
+                                location.reload()
+                            }
+                        })
+                }
+            }
+        )
+
+    </script>
 </body>
 </html>

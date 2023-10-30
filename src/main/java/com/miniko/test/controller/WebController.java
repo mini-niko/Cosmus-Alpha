@@ -1,18 +1,22 @@
 package com.miniko.test.controller;
 
-import com.miniko.test.entities.user.LoginDTO;
-import com.miniko.test.entities.user.RegisterDTO;
-import com.miniko.test.entities.user.User;
-import com.miniko.test.entities.user.UserDTO;
+import com.miniko.test.entities.user.*;
 import com.miniko.test.service.UserService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class WebController {
@@ -68,11 +72,21 @@ public class WebController {
     }
 
     @GetMapping("/home")
-    public ModelAndView home(UserDTO userData, HttpSession httpSession) {
+    public ModelAndView home(HttpSession httpSession) throws IOException {
 
         ModelAndView mv = new ModelAndView();
         mv.setViewName("home");
-        mv.addObject("userName", httpSession.getAttribute("userName"));
+        mv.addObject("user", httpSession.getAttribute("user"));
+
+
+        PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
+        Resource[] resources = resolver.getResources("classpath:/static/img/avatar/*");
+
+        List<String> images = new ArrayList<>();
+        for (Resource resource : resources) {
+            images.add(resource.getFilename());
+        }
+        mv.addObject("imagesName", images);
 
         return mv;
     }
@@ -81,13 +95,12 @@ public class WebController {
     public ModelAndView loginPost(LoginDTO userLogin, HttpSession httpSession) {
         ModelAndView mv = new ModelAndView();
 
-        ResponseEntity responseEntity = apiUserController.login(userLogin);
+        ResponseEntity responseEntity = apiUserController.login(userLogin, httpSession);
 
         if(responseEntity.getStatusCode() == HttpStatus.OK) {
             UserDTO userDTO = (UserDTO) responseEntity.getBody();
 
-            httpSession.setAttribute("userToken", userDTO.token());
-            httpSession.setAttribute("userName", userDTO.name());
+            httpSession.setAttribute("user", userDTO);
 
             mv.setViewName("redirect:/home");
         }
@@ -103,13 +116,12 @@ public class WebController {
     public ModelAndView registryPost(RegisterDTO userRegistry, HttpSession httpSession) {
         ModelAndView mv = new ModelAndView();
 
-        ResponseEntity responseEntity = apiUserController.register(userRegistry);
+        ResponseEntity responseEntity = apiUserController.register(userRegistry, httpSession);
 
         if(responseEntity.getStatusCode() == HttpStatus.CREATED) {
             UserDTO userDTO = (UserDTO) responseEntity.getBody();
 
-            httpSession.setAttribute("userToken", userDTO.token());
-            httpSession.setAttribute("userName", userDTO.name());
+            httpSession.setAttribute("user", userDTO);
 
             mv.setViewName("redirect:/home");
         }
@@ -119,5 +131,24 @@ public class WebController {
         }
 
         return mv;
+    }
+
+    @PostMapping("/change-avatar")
+    public ResponseEntity changeAvatar(@RequestBody AvatarDTO avatar, HttpSession httpSession) {
+        UserDTO oldUserDTO = (UserDTO) httpSession.getAttribute("user");
+        ModelAndView mv = new ModelAndView();
+
+        System.out.println(avatar.toString());
+
+        ResponseEntity responseEntity = apiUserController.changeAvatar(avatar, httpSession);
+
+        if(responseEntity.getStatusCode() == HttpStatus.OK) {
+            User user = (User) responseEntity.getBody();
+            UserDTO NewUserDTO = new UserDTO(user, oldUserDTO.token());
+
+            httpSession.setAttribute("user", NewUserDTO);
+        }
+
+        return responseEntity;
     }
 }
