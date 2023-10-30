@@ -24,16 +24,17 @@ public class SecurityConfig {
 
         return httpSecurity
                 .csrf(csrf -> csrf.disable())
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .authorizeHttpRequests( authorize -> authorize
-                    .requestMatchers("login", "registry").permitAll()
-                    .requestMatchers("css/**", "img/**", "js/**").permitAll()
-                    .requestMatchers("api/users/**").permitAll()
-                    .anyRequest().authenticated()
-                )
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.ALWAYS))
+                .authorizeRequests(authorize -> {
+                    authorize
+                            .requestMatchers("/login", "/registry").permitAll()
+                            .requestMatchers("/css/**", "/img/**", "/js/**").permitAll()
+                            .requestMatchers("/api/users/**").permitAll()
+                            .anyRequest().authenticated();
+                })
                 .formLogin(form -> form
-                    .loginPage("/")
-                    .permitAll()
+                        .loginPage("/")
+                        .permitAll()
                 )
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
