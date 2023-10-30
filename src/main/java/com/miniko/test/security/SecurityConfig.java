@@ -24,12 +24,12 @@ public class SecurityConfig {
 
         return httpSecurity
                 .csrf(csrf -> csrf.disable())
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.ALWAYS))
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED))
                 .authorizeRequests(authorize -> {
                     authorize
-                            .requestMatchers("/login", "/registry").permitAll()
-                            .requestMatchers("/css/**", "/img/**", "/js/**").permitAll()
-                            .requestMatchers("/api/users/**").permitAll()
+                            .antMatchers("/login", "/registry").permitAll()
+                            .antMatchers("/css/**", "/img/**", "/js/**").permitAll()
+                            .antMatchers("/api/users/**").permitAll()
                             .anyRequest().authenticated();
                 })
                 .formLogin(form -> form
@@ -37,6 +37,13 @@ public class SecurityConfig {
                         .permitAll()
                 )
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
+                .cacheControl(cache ->
+                        cache
+                                .cachePublic()
+                                .maxAge(3600)
+                )
+                .and().headers().cacheControl()
+                .and()
                 .build();
     }
 
