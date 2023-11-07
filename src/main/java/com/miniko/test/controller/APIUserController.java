@@ -14,6 +14,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @RestController
 @RequestMapping("api/users")
 public class APIUserController {
@@ -42,11 +44,18 @@ public class APIUserController {
             Authentication auth = authenticationManager.authenticate(usernamePassword);
             String token = tokenService.generateToken((User) auth.getPrincipal());
 
-            User user = userService.findUserByEmail(data.email());
+            Optional<User> userOptional = userService.findUserByEmail(data.email());
 
-            UserDTO userDTO = new UserDTO(user, token);
-            httpSession.setAttribute("user", userDTO);
-            return ResponseEntity.ok(userDTO);
+            if (userOptional.isPresent()) {
+                User user = userOptional.get();
+
+                UserDTO userDTO = new UserDTO(user, token);
+                httpSession.setAttribute("user", userDTO);
+                return ResponseEntity.ok(userDTO);
+            }
+            else {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid User.");
+            }
         }
         catch (Exception error) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Email and password do not match any account");
@@ -87,13 +96,17 @@ public class APIUserController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid Token");
         }
 
-        User user = userService.findUserByEmail(email);
+        Optional<User> userOptional = userService.findUserByEmail(email);
 
-        System.out.println(user + " | " + email);
+        if(userOptional.isPresent()) {
+            User user = userOptional.get();
 
-        user.setAvatar(avatar.avatar());
-        userService.updateUser(user.getId(), user);
-
-        return ResponseEntity.ok(user);
+            user.setAvatar(avatar.avatar());
+            userService.updateUser(user.getId(), user);
+            return ResponseEntity.ok(user);
+        }
+        else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid user.");
+        }
     }
 }

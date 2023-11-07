@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <title>Cosmus</title>
 
-    <link rel="icon" type="image/png" href="img/favicon.png">
+    <link rel="icon" type="image/png" href="assets/img/favicon.png">
 
-    <link rel="stylesheet" href="css/brutopia.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="assets/brutopia/css/brutopia.css">
+    <link rel="stylesheet" href="assets/custom/style.css">
 
 </head>
 <body class="bg-light-info p-0">
@@ -22,7 +22,7 @@
             <div th:if="${user != null}">
                 <div th:if="${user.avatar == null}">
                     <div class="dropdown">
-                        <img src="img/user-solid.svg" height="75" width="75" class="m-0 avatar dropdown-toggle rounded-circle border border-dark border-3 hover-clickable" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img src="assets/img/user-solid.svg" height="75" width="75" class="m-0 avatar dropdown-toggle rounded-circle border border-dark border-3 hover-clickable" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <div class="dropdown-menu dropdown-menu-end me-1 mt-4">
                             <button class="dropdown-item" data-toggle="modal" data-target="#avatarModal">Trocar Avatar</button>
                             <hr class="dropdown-divider">
@@ -32,7 +32,7 @@
                 </div>
                 <div th:if="${user.avatar != null}">
                     <div class="dropdown">
-                        <img th:src="@{'/img/avatar/' + ${user.avatar}}" id="avatar-pic" height="75" width="75" class="m-0 avatar dropdown-toggle rounded-circle border border-dark border-3 hover-clickable" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img th:src="@{'/assets/img/avatar/' + ${user.avatar}}" id="avatar-pic" height="75" width="75" class="m-0 avatar dropdown-toggle rounded-circle border border-dark border-3 hover-clickable" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <div class="dropdown-menu dropdown-menu-end me-1 mt-4">
                             <button class="dropdown-item" data-toggle="modal" data-target="#avatarModal">Trocar Avatar</button>
                             <hr class="dropdown-divider">
@@ -55,7 +55,7 @@
                         <div class="modal-body">
                             <div class="d-flex justify-content-center flex-row gap-3 flex-wrap">
                                 <div th:each="imagem : ${imagesName}">
-                                    <img th:src="@{'/img/avatar/' + ${imagem}}" class="avatarSelect border rounded-circle border-3 border-primary hover-clickable" height="75" width="75">
+                                    <img th:src="@{'/assets/img/avatar/' + ${imagem}}" class="avatarSelect border rounded-circle border-3 border-primary hover-clickable" height="75" width="75">
                                 </div>
                             </div>
                         </div>
@@ -71,7 +71,7 @@
         </div>
     </header>
 
-    <script src="js/brutopia.js"></script><script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     <script>

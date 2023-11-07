@@ -31,21 +31,16 @@ public class WebController {
         this.userService = userService;
     }
 
-//    @GetMapping("/index")
-//    public String index() {
-//        return "index";
-//    }
-
     @GetMapping(value = { "", "/" })
-    public String redirect() {
-        return "redirect:/login";
+    public String index() {
+        return "index";
     }
 
     @GetMapping("/login")
     public ModelAndView loginGet(HttpSession httpSession) {
         ModelAndView mv = new ModelAndView();
 
-        if(httpSession.getAttribute("userToken") == null) {
+        if(httpSession.getAttribute("user") == null) {
             mv.addObject("user", new User());
             mv.setViewName("login");
         }
@@ -60,7 +55,7 @@ public class WebController {
     public ModelAndView registryGet(HttpSession httpSession) {
         ModelAndView mv = new ModelAndView();
 
-        if(httpSession.getAttribute("userToken") == null) {
+        if(httpSession.getAttribute("user") == null) {
             mv.addObject("user", new User());
             mv.setViewName("registry");
         }
@@ -80,7 +75,7 @@ public class WebController {
 
 
         PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
-        Resource[] resources = resolver.getResources("classpath:/static/img/avatar/*");
+        Resource[] resources = resolver.getResources("classpath:/static/assets/img/avatar/*");
 
         List<String> images = new ArrayList<>();
         for (Resource resource : resources) {
@@ -137,8 +132,6 @@ public class WebController {
     public ResponseEntity changeAvatar(@RequestBody AvatarDTO avatar, HttpSession httpSession) {
         UserDTO oldUserDTO = (UserDTO) httpSession.getAttribute("user");
         ModelAndView mv = new ModelAndView();
-
-        System.out.println(avatar.toString());
 
         ResponseEntity responseEntity = apiUserController.changeAvatar(avatar, httpSession);
 

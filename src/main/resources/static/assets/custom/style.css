@@ -1,0 +1,165 @@
+body, html {
+    max-width: 100vw !important;
+}
+
+p, h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+    padding: 0;
+    color: black;
+}
+
+.swiper {
+    height: 500px;
+    .swiper-slide {
+        background: #ccc;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 20px;
+    }
+}
+
+.swiper-slide img {
+    position: absolute;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    object-position: center;
+    object-fit: cover;
+    filter: brightness(50%);
+}
+
+.shadow-nb {
+    box-shadow: 5px 5px 0 black;
+}
+
+.section-title {
+    text-align: center;
+    padding-bottom: 30px;
+}
+
+.section-title p {
+    font-size: 1.2rem;
+}
+
+.section-title h2 {
+    font-size: 32px;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    position: relative;
+    color: #37517e;
+}
+
+.section-title h2::before {
+    content: "";
+    position: absolute;
+    display: block;
+    width: 120px;
+    height: 1px;
+    background: #ddd;
+    bottom: 1px;
+    left: calc(50% - 60px);
+}
+
+.section-title h2::after {
+    content: "";
+    position: absolute;
+    display: block;
+    width: 40px;
+    height: 3px;
+    background: #47b2e4;
+    bottom: 0;
+    left: calc(50% - 20px);
+}
+
+.section-title p {
+    margin-bottom: 0;
+}
+
+.text-nb {
+    color: black;
+}
+
+.container-nb {
+    border: #000 solid 3px;
+    background-color: white;
+    box-shadow: 5px 5px 0 black;
+    color: black;
+}
+
+.container-nb h4 {
+    font-size: 1.8em;
+}
+
+.container-nb p {
+    font-size: 1.2em;
+}
+
+.section-title-nb {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.section-title-nb h2 {
+    color: black;
+    font-size: 3em;
+    border-bottom: black solid 3px;
+    padding: 0 1em 5px 1em;
+    width: fit-content;
+}
+
+.section-title-nb p {
+    font-size: 1.4em;
+    margin-bottom: 2em;
+}
+
+.btn-nb {
+    transition: transform 0.3s;
+}
+
+.btn-nb:hover {
+    transform: translateY(-5px) scale(1.05);
+    transition: transform 0.3s;
+}
+
+#social-medias {
+    list-style-type: none;
+}
+
+.hover-clickable:hover {
+    cursor: pointer;
+}
+
+.card {
+    border-radius: 0;
+    border: 3px solid black;
+    box-shadow: 5px 5px black;
+}
+
+.dropdown-menu, .modal-content, .btn, input {
+    border-radius: 0 !important;
+    border-width: 2px !important;
+    box-shadow: 2px 2px black;
+}
+
+hr {
+    border-radius: 0 !important;
+    border-width: 2px;
+}
+
+html, body {
+    height: 100% !important;
+}
+
+.background-img {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    object-position: center;
+    object-fit: cover;
+    filter: brightness(50%)
+}
