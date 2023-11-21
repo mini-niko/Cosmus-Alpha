@@ -1,6 +1,6 @@
 package com.miniko.test.service;
 
-import com.miniko.test.entities.Post;
+import com.miniko.test.entities.post.Post;
 import com.miniko.test.repository.PostRepository;
 import org.springframework.stereotype.Service;
 
@@ -34,7 +34,7 @@ public class PostService {
         Optional<Post> existingPost = postRepository.findById(id);
         if (existingPost.isPresent()) {
             Post post = existingPost.get();
-            post.setTitle(updatePost.getTitle());
+            post.setDescription(updatePost.getDescription());
             post.setUserId(updatePost.getUserId());
             return postRepository.save(post);
         }
