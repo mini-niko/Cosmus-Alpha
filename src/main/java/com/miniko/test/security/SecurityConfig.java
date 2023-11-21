@@ -30,7 +30,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests( authorize -> authorize
                     .requestMatchers("login", "registry").permitAll()
                     .requestMatchers("assets/**").permitAll()
-                    .requestMatchers("api/users/**").permitAll()
+                    .requestMatchers("api/**").permitAll()
                     .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
