@@ -12,7 +12,8 @@ CREATE TABLE users(
 CREATE TABLE posts(
 	`id` VARCHAR(100) UNIQUE NOT NULL,
     `userId` VARCHAR(100) NOT NULL,
-    `title` VARCHAR(100) NOT NULL,
+    `description` VARCHAR(100) NOT NULL,
+    `file` MEDIUMBLOB NOT NULL,
     
     FOREIGN KEY (`userId`) REFERENCES users(`id`)
 )

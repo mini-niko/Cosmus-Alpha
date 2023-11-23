@@ -1,9 +1,14 @@
 package com.miniko.test.entities.post;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.util.Arrays;
+import java.util.Base64;
 import java.util.Date;
+import java.util.Optional;
 
 @Entity(name = "posts")
 @Table(name = "posts")
@@ -13,15 +18,21 @@ public class Post {
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
-    @NotBlank(message = "")
     private String userId;
-
-    @Column
-    private byte[] image;
 
     private String description;
 
     private Date date;
+
+    public Post() {
+
+    }
+
+    public Post(String userId, String description, Date date) {
+        this.userId = userId;
+        this.description = description;
+        this.date = date;
+    }
 
     public String getId() {
         return id;
@@ -43,12 +54,21 @@ public class Post {
         this.description = description;
     }
 
-    public byte[] getImage() {
-        return image;
-    }
+    public String getFile() throws IOException {
+        File directory = new File("src/main/resources/static/posts/");
 
-    public void setImage(byte[] image) {
-        this.image = image;
+        Optional<File> file = Arrays.stream(directory.listFiles())
+                .filter(file1 -> file1.getName().startsWith(this.id))
+                .findFirst();
+
+        if(file.get().exists()) {
+            byte[] fileContent = Files.readAllBytes(file.get().toPath());
+            String base64 = Base64.getEncoder().encodeToString(fileContent);
+
+            return base64;
+        }
+
+        return null;
     }
 
     public Date getDate() {
@@ -58,4 +78,6 @@ public class Post {
     public void setDate(Date date) {
         this.date = date;
     }
+
+
 }

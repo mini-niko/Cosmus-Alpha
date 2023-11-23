@@ -1,6 +1,10 @@
 package com.miniko.test.controller;
 
+import com.miniko.test.entities.post.Post;
+import com.miniko.test.entities.post.PostCreateDTO;
+import com.miniko.test.entities.post.PostViewDTO;
 import com.miniko.test.entities.user.*;
+import com.miniko.test.service.PostService;
 import com.miniko.test.service.UserService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,15 +25,17 @@ import java.util.List;
 @Controller
 public class WebController {
 
-    private final UserService userService;
-
     @Autowired
     public APIUserController apiUserController;
 
     @Autowired
-    public WebController(UserService userService) {
-        this.userService = userService;
-    }
+    public APIPostController apiPostController;
+
+    @Autowired
+    public PostService postService;
+
+    @Autowired
+    public UserService userService;
 
     @GetMapping(value = { "", "/" })
     public String index() {
@@ -73,14 +79,10 @@ public class WebController {
         mv.setViewName("home");
         mv.addObject("user", httpSession.getAttribute("user"));
 
+        List<String> images = this.getAvatarsName();
+        List<PostViewDTO> postsDTO = this.getAllPosts();
 
-        PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
-        Resource[] resources = resolver.getResources("classpath:/static/assets/img/avatar/*");
-
-        List<String> images = new ArrayList<>();
-        for (Resource resource : resources) {
-            images.add(resource.getFilename());
-        }
+        mv.addObject("posts", postsDTO);
         mv.addObject("imagesName", images);
 
         return mv;
@@ -143,5 +145,38 @@ public class WebController {
         }
 
         return responseEntity;
+    }
+
+    @PostMapping("/create-post")
+    public ResponseEntity createPost(PostCreateDTO postCreateDTO) {
+        ResponseEntity responseEntity = apiPostController.createPost(postCreateDTO.userId(), postCreateDTO.description(), postCreateDTO.file());
+
+        return responseEntity;
+    }
+
+    private List<String> getAvatarsName() throws IOException {
+        PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
+        Resource[] resources = resolver.getResources("classpath:/static/assets/img/avatar/*");
+
+        List<String> images = new ArrayList<>();
+
+        for (Resource resource : resources) {
+            images.add(resource.getFilename());
+        }
+
+        return images
+    }
+
+    private List<PostViewDTO> getAllPosts() throws IOException {
+        List<PostViewDTO> postsDTO = new ArrayList<>();
+        List<Post> posts = postService.getAllPosts();
+
+        for(Post post : posts) {
+            User user = userService.findUserById(post.getUserId()).get();
+            PostViewDTO postViewDTO = new PostViewDTO(user.getName(), user.getAvatar(), post.getFile(), post.getDescription());
+            postsDTO.add(postViewDTO);
+        }
+
+        return postsDTO;
     }
 }
