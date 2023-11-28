@@ -164,7 +164,7 @@ public class WebController {
             images.add(resource.getFilename());
         }
 
-        return images
+        return images;
     }
 
     private List<PostViewDTO> getAllPosts() throws IOException {

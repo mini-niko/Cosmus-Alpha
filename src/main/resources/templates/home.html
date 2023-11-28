@@ -71,6 +71,12 @@
         </div>
     </header>
 
+    <div class="container">
+        <div class="row d-flex justify-content-center">
+            <div class="col-6 card"></div>
+        </div>
+    </div>
+
     
 
     <button type="button" class="btn btn-circle btn-primary btn-lg rounded-circle" data-toggle="modal" data-target="#PostModal">
@@ -91,16 +97,18 @@
 
                         <img id="frame" src="" width="100%" height="auto" class="rounded mx-auto d-block"/>
                         <div class="form-group">
+                            <label for="imgURL" class="col-form-label">Escolha URL:</label>
+                            <input type="url" class="form-control" id="imgURL" placeholder="http://www.imgJPG.com" />
+
                             <label for="message-text" class="col-form-label">Descrição:</label>
                             <textarea class="form-control" id="message-text"></textarea>
+
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                     <button type="button" class="btn btn-primary">Publicar</button>
-                    <input id="file" type="file" onchange="preview()" style="display: none;">
-                    <button id="imgButton" onchange="preview()" class="btn btn-primary">Escolha Obra</button>
 
                 </div>
             </div>
