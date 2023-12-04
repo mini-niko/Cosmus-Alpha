@@ -1,65 +1,49 @@
 package com.miniko.test.controller;
 
 import com.miniko.test.entities.post.Post;
+import com.miniko.test.entities.post.PostCreateDTO;
+import com.miniko.test.entities.user.User;
 import com.miniko.test.service.PostService;
-import jakarta.validation.constraints.NotBlank;
+import com.miniko.test.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("api/posts")
 public class APIPostController {
 
     private final PostService postService;
+    private final UserService userService;
 
     @Autowired
-    public APIPostController(PostService postService) {
-        this.postService = postService;
+    public APIPostController(PostService postService, UserService userService) {
+        this.postService = postService; this.userService = userService;
     }
 
-    private List<String> imageExtensions = new ArrayList<String>() {{
-        add(".jpg");
-        add(".jpeg");
-        add(".png");
-        add(".webp");
-        add(".gif");
-    }};
-
     @PostMapping("create")
-    public ResponseEntity createPost(
-            @RequestPart("userId") @NotBlank String userId,
-            @RequestPart("description") String description,
-            @RequestPart("file") MultipartFile file
-    ) {
-        Post post = new Post(userId, description, new Date());
+    public ResponseEntity createPost(@RequestBody PostCreateDTO postCreateDTO) {
+        if(postCreateDTO.userId() == null) return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Expected userId, but is null");
+        if(postCreateDTO.file() == null) return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Expected file, but is null");
+
+        Optional<User> user = userService.findUserById(postCreateDTO.userId());
+        if(user.isEmpty()) return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Not found user with Id");
+
+        boolean validImage = postService.isValidImage(postCreateDTO.file());
+        if(!validImage) return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid URL");
+
+        Post post = new Post(postCreateDTO.userId(), postCreateDTO.description(), new Date(), postCreateDTO.file());
         postService.createPost(post);
 
-        try {
-            String fileName = file.getOriginalFilename();
-            String fileExtension = fileName.substring(fileName.lastIndexOf(".")).toLowerCase();
+        return ResponseEntity.ok(post);
+    }
 
-            if(!imageExtensions.contains(fileExtension))
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-
-            String newFileName = post.getId() + fileExtension;
-            Files.write(Path.of("src/main/resources/static/posts/" + newFileName), file.getBytes());
-
-            return ResponseEntity.status(HttpStatus.CREATED).body(post);
-        } catch (IOException e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
-        }
+    @GetMapping("valid-image")
+    public boolean validImage(@RequestParam String imageLink) {
+        return postService.isValidImage(imageLink);
     }
 }

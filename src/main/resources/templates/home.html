@@ -1,22 +1,22 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Cosmus</title>
+            <html lang="en" xmlns:th="http://www.thymeleaf.org">
+            <head>
+                <meta charset="UTF-8">
+                <title>Cosmus</title>
 
-    <link rel="icon" type="image/png" href="assets/img/favicon.png">
-    <link rel="stylesheet" href="assets/brutopia/css/brutopia.css">
-    <link rel="stylesheet" href="assets/custom/style.css">
-    <link rel="stylesheet" href="assets/font-awesome/css/all.min.css">
+                <link rel="icon" type="image/png" href="assets/img/favicon.png">
+                <link rel="stylesheet" href="assets/brutopia/css/brutopia.css">
+                <link rel="stylesheet" href="assets/custom/style.css">
+                <link rel="stylesheet" href="assets/font-awesome/css/all.min.css">
 
-</head>
-<body class="bg-light-info p-0">
+            </head>
+            <body class="bg-light-info p-0">
 
-    <!--  Header  -->
-    <header class="card m-2 p-3 d-flex justify-content-between flex-row align-items-center">
-        <h1 class="display-4">Cosmus</h1>
-        <div class="d-flex align-items-center justify-content-between">
-            <div th:if="${user != null}"><h4 class="me-3" th:text="${'Seja bem vindo ' + user.name}"></h4></div>
+            <!--  Header  -->
+            <header class="card m-2 p-3 d-flex justify-content-between flex-row align-items-center">
+                <h1 class="display-4">Cosmus</h1>
+                <div class="d-flex align-items-center justify-content-between">
+                    <div th:if="${user != null}"><h4 class="me-3" th:text="${'Seja bem vindo ' + user.name}"></h4></div>
 
             <!-- Menu Dropdown com a imagem -->
             <div th:if="${user != null}">

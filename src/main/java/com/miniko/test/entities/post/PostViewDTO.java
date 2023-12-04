@@ -1,4 +1,7 @@
 package com.miniko.test.entities.post;
 
-public record PostViewDTO(String userName, String userAvatar, String file, String description) {
+import java.util.Date;
+
+public record PostViewDTO(String userName, String userAvatar, String file, String description, Date date) {
+
 }

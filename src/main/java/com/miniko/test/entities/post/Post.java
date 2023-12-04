@@ -2,13 +2,7 @@ package com.miniko.test.entities.post;
 
 import jakarta.persistence.*;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.util.Arrays;
-import java.util.Base64;
 import java.util.Date;
-import java.util.Optional;
 
 @Entity(name = "posts")
 @Table(name = "posts")
@@ -24,14 +18,17 @@ public class Post {
 
     private Date date;
 
+    private String fileLink;
+
     public Post() {
 
     }
 
-    public Post(String userId, String description, Date date) {
+    public Post(String userId, String description, Date date, String fileLink) {
         this.userId = userId;
         this.description = description;
         this.date = date;
+        this.fileLink = fileLink;
     }
 
     public String getId() {
@@ -54,23 +51,6 @@ public class Post {
         this.description = description;
     }
 
-    public String getFile() throws IOException {
-        File directory = new File("src/main/resources/static/posts/");
-
-        Optional<File> file = Arrays.stream(directory.listFiles())
-                .filter(file1 -> file1.getName().startsWith(this.id))
-                .findFirst();
-
-        if(file.get().exists()) {
-            byte[] fileContent = Files.readAllBytes(file.get().toPath());
-            String base64 = Base64.getEncoder().encodeToString(fileContent);
-
-            return base64;
-        }
-
-        return null;
-    }
-
     public Date getDate() {
         return date;
     }
@@ -79,5 +59,11 @@ public class Post {
         this.date = date;
     }
 
+    public String getFileLink() {
+        return fileLink;
+    }
 
+    public void setFileLink(String fileLink) {
+        this.fileLink = fileLink;
+    }
 }

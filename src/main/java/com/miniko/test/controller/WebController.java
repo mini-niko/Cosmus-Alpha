@@ -1,6 +1,5 @@
 package com.miniko.test.controller;
 
-import com.miniko.test.entities.post.Post;
 import com.miniko.test.entities.post.PostCreateDTO;
 import com.miniko.test.entities.post.PostViewDTO;
 import com.miniko.test.entities.user.*;
@@ -74,13 +73,12 @@ public class WebController {
 
     @GetMapping("/home")
     public ModelAndView home(HttpSession httpSession) throws IOException {
-
         ModelAndView mv = new ModelAndView();
         mv.setViewName("home");
         mv.addObject("user", httpSession.getAttribute("user"));
 
         List<String> images = this.getAvatarsName();
-        List<PostViewDTO> postsDTO = this.getAllPosts();
+        List<PostViewDTO> postsDTO = postService.getAllPostsViewDTO();
 
         mv.addObject("posts", postsDTO);
         mv.addObject("imagesName", images);
@@ -148,10 +146,10 @@ public class WebController {
     }
 
     @PostMapping("/create-post")
-    public ResponseEntity createPost(PostCreateDTO postCreateDTO) {
-        ResponseEntity responseEntity = apiPostController.createPost(postCreateDTO.userId(), postCreateDTO.description(), postCreateDTO.file());
+    public String createPost(@RequestBody PostCreateDTO postCreateDTO, HttpSession httpSession) {
+        ResponseEntity responseEntity = apiPostController.createPost(postCreateDTO);
 
-        return responseEntity;
+        return "home";
     }
 
     private List<String> getAvatarsName() throws IOException {
@@ -164,19 +162,6 @@ public class WebController {
             images.add(resource.getFilename());
         }
 
-        return images
-    }
-
-    private List<PostViewDTO> getAllPosts() throws IOException {
-        List<PostViewDTO> postsDTO = new ArrayList<>();
-        List<Post> posts = postService.getAllPosts();
-
-        for(Post post : posts) {
-            User user = userService.findUserById(post.getUserId()).get();
-            PostViewDTO postViewDTO = new PostViewDTO(user.getName(), user.getAvatar(), post.getFile(), post.getDescription());
-            postsDTO.add(postViewDTO);
-        }
-
-        return postsDTO;
+        return images;
     }
 }
