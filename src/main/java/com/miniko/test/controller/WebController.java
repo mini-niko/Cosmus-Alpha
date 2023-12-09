@@ -1,5 +1,6 @@
 package com.miniko.test.controller;
 
+import com.miniko.test.entities.post.Post;
 import com.miniko.test.entities.post.PostCreateDTO;
 import com.miniko.test.entities.post.PostViewDTO;
 import com.miniko.test.entities.user.*;
@@ -147,7 +148,7 @@ public class WebController {
 
     @PostMapping("/create-post")
     public String createPost(@RequestBody PostCreateDTO postCreateDTO, HttpSession httpSession) {
-        ResponseEntity responseEntity = apiPostController.createPost(postCreateDTO);
+        apiPostController.createPost(postCreateDTO);
 
         return "home";
     }
@@ -163,5 +164,17 @@ public class WebController {
         }
 
         return images;
+    }
+
+    private List<PostViewDTO> getAllPosts() throws IOException {
+        List<PostViewDTO> postsDTO = new ArrayList<>();
+        List<PostViewDTO> posts = postService.getAllPostsViewDTO();
+
+        for(PostViewDTO post : posts) {
+            PostViewDTO postViewDTO = new PostViewDTO(post.userName(), post.userAvatar(), post.file(), post.description(), post.date());
+            postsDTO.add(postViewDTO);
+        }
+
+        return postsDTO;
     }
 }

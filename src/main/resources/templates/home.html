@@ -71,7 +71,24 @@
         </div>
     </header>
 
-    
+    <div class="instagram-card">
+        <div class="instagram-card-header">
+            <img src="assets/img/avatar/Avatar12.jpg" class="instagram-card-user-image"/>
+            <a class="instagram-card-user-name" href="https://www.instagram.com/pedlo09/">pedlo09</a>
+            <div class="instagram-card-time">58 min</div>
+        </div>
+
+        <div class="intagram-card-image mt-5">
+            <img src="assets/img/slider/image3.jpg" width="100%" height="auto"/>
+        </div>
+
+        <div class="instagram-card-content">
+            <p class="likes">18.068 likes</p>
+            <p><a class="instagram-card-content-user" href="https://www.instagram.com/pedlo09/">pedlo09</a>
+                Fico feliz em compartilhar minha primeira arte com vcs <3.
+                <a class="hashtag" href="https://www.instagram.com/explore/tags/visitkemi/">#visitkemi</a></p>
+        </div>
+    </div>
 
     <button type="button" class="btn btn-circle btn-primary btn-lg rounded-circle" data-toggle="modal" data-target="#PostModal">
         <i class="fa-solid fa-plus rounded-circle"></i>
@@ -91,16 +108,18 @@
 
                         <img id="frame" src="" width="100%" height="auto" class="rounded mx-auto d-block"/>
                         <div class="form-group">
+                            <label for="imgURL" class="col-form-label">Escolha URL:</label>
+                            <input type="url" class="form-control" id="imgURL" placeholder="http://www.imgJPG.com" />
+
                             <label for="message-text" class="col-form-label">Descrição:</label>
                             <textarea class="form-control" id="message-text"></textarea>
+
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                     <button type="button" class="btn btn-primary">Publicar</button>
-                    <input id="file" type="file" onchange="preview()" style="display: none;">
-                    <button id="imgButton" onchange="preview()" class="btn btn-primary">Escolha Obra</button>
 
                 </div>
             </div>
