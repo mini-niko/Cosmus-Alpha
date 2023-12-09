@@ -151,4 +151,17 @@ public class WebController {
 
         return "home";
     }
+
+    private List<String> getAvatarsName() throws IOException {
+        PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
+        Resource[] resources = resolver.getResources("classpath:/static/assets/img/avatar/*");
+
+        List<String> images = new ArrayList<>();
+
+        for (Resource resource : resources) {
+            images.add(resource.getFilename());
+        }
+
+        return images;
+    }
 }
