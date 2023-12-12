@@ -103,23 +103,22 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    <form>
-                        <img id="frame" src="" width="100%" height="auto" class="rounded mx-auto d-block"/>
-                        <div class="form-group">
-                            <label for="imgURL" class="col-form-label">Escolha URL:</label>
-                            <input type="url" class="form-control" id="imgURL" placeholder="http://www.imgJPG.com" />
+                <form action="/api/posts/create" method="Post">
+                    <div class="modal-body">
+                            <img id="frame" src="" width="100%" height="auto" class="rounded mx-auto d-block"/>
+                            <div class="form-group">
+                                <label for="imgURL" class="col-form-label">Escolha URL:</label>
+                                <input type="url" class="form-control" id="imgURL" placeholder="http://www.imgJPG.com"/>
 
-                            <label for="message-text" class="col-form-label">Descrição:</label>
-                            <textarea class="form-control" id="message-text"></textarea>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-primary">Publicar</button>
-<!--                 api/posts/create    -->
-                </div>
+                                <label for="message-text" class="col-form-label">Descrição:</label>
+                                <textarea class="form-control" id="message-text"></textarea>
+                            </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary" >Publicar</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -129,10 +128,8 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     <script src="assets/font-awesome/js/all.min.js"></script>
     <script>
-        document.getElementById("imgButton").addEventListener("click", () => {
-            document.getElementById('file').click()
-            console.log("clicado!")
-        })
+
+
 
         var imgs = document.querySelectorAll(".avatarSelect")
         var imgSelected;
