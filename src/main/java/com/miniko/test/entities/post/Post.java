@@ -12,23 +12,23 @@ public class Post {
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
-    private String userId;
+    private String user_id;
 
     private String description;
 
     private Date date;
 
-    private String fileLink;
+    private String file_link;
 
     public Post() {
 
     }
 
-    public Post(String userId, String description, Date date, String fileLink) {
-        this.userId = userId;
+    public Post(String user_id, String description, Date date, String file_link) {
+        this.user_id = user_id;
         this.description = description;
         this.date = date;
-        this.fileLink = fileLink;
+        this.file_link = file_link;
     }
 
     public String getId() {
@@ -36,11 +36,11 @@ public class Post {
     }
 
     public String getUserId() {
-        return userId;
+        return user_id;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setUserId(String user_id) {
+        this.user_id = user_id;
     }
 
     public String getDescription() {
@@ -60,10 +60,10 @@ public class Post {
     }
 
     public String getFileLink() {
-        return fileLink;
+        return file_link;
     }
 
-    public void setFileLink(String fileLink) {
-        this.fileLink = fileLink;
+    public void setFileLink(String file_link) {
+        this.file_link = file_link;
     }
 }

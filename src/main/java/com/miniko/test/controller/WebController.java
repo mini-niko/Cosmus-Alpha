@@ -1,6 +1,5 @@
 package com.miniko.test.controller;
 
-import com.miniko.test.entities.post.Post;
 import com.miniko.test.entities.post.PostCreateDTO;
 import com.miniko.test.entities.post.PostViewDTO;
 import com.miniko.test.entities.user.*;
@@ -169,6 +168,8 @@ public class WebController {
     private List<PostViewDTO> getAllPosts() throws IOException {
         List<PostViewDTO> postsDTO = new ArrayList<>();
         List<PostViewDTO> posts = postService.getAllPostsViewDTO();
+
+        if(posts.isEmpty()) return null;
 
         for(PostViewDTO post : posts) {
             PostViewDTO postViewDTO = new PostViewDTO(post.userName(), post.userAvatar(), post.file(), post.description(), post.date());
