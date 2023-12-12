@@ -1,30 +1,33 @@
 <!DOCTYPE html>
-            <html lang="en" xmlns:th="http://www.thymeleaf.org">
-            <head>
-                <meta charset="UTF-8">
-                <title>Cosmus</title>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Cosmus</title>
 
-                <link rel="icon" type="image/png" href="assets/img/favicon.png">
-                <link rel="stylesheet" href="assets/brutopia/css/brutopia.css">
-                <link rel="stylesheet" href="assets/custom/style.css">
-                <link rel="stylesheet" href="assets/font-awesome/css/all.min.css">
+    <link rel="icon" type="image/png" href="assets/img/favicon.png">
+    <link rel="stylesheet" href="assets/brutopia/css/brutopia.css">
+    <link rel="stylesheet" href="assets/custom/style.css">
+    <link rel="stylesheet" href="assets/font-awesome/css/all.min.css">
+</head>
+<body class="bg-light-info p-0">
 
-            </head>
-            <body class="bg-light-info p-0">
-
-            <!--  Header  -->
-            <header class="card m-2 p-3 d-flex justify-content-between flex-row align-items-center">
-                <h1 class="display-4">Cosmus</h1>
-                <div class="d-flex align-items-center justify-content-between">
-                    <div th:if="${user != null}"><h4 class="me-3" th:text="${'Seja bem vindo ' + user.name}"></h4></div>
+<div class="site">
+    <!--  Header  -->
+    <header class="card p-3 d-flex justify-content-between flex-row align-items-center">
+        <h1 class="display-4">Cosmus</h1>
+        <div class="d-flex align-items-center justify-content-between">
+            <div th:if="${user != null}"><h4 class="me-3" th:text="${'Seja bem vindo ' + user.name}"></h4></div>
 
             <!-- Menu Dropdown com a imagem -->
             <div th:if="${user != null}">
                 <div th:if="${user.avatar == null}">
                     <div class="dropdown">
-                        <img src="assets/img/user-solid.svg" height="75" width="75" class="m-0 avatar dropdown-toggle rounded-circle border border-dark border-3 hover-clickable" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img src="assets/img/user-solid.svg" height="75" width="75"
+                             class="m-0 avatar dropdown-toggle rounded-circle border border-dark border-3 hover-clickable"
+                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <div class="dropdown-menu dropdown-menu-end me-1 mt-4">
-                            <button class="dropdown-item" data-toggle="modal" data-target="#avatarModal">Trocar Avatar</button>
+                            <button class="dropdown-item" data-toggle="modal" data-target="#avatarModal">Trocar Avatar
+                            </button>
                             <hr class="dropdown-divider">
                             <a href="/logout" class="dropdown-item">Logout</a>
                         </div>
@@ -32,9 +35,12 @@
                 </div>
                 <div th:if="${user.avatar != null}">
                     <div class="dropdown">
-                        <img th:src="@{'/assets/img/avatar/' + ${user.avatar}}" id="avatar-pic" height="75" width="75" class="m-0 avatar dropdown-toggle rounded-circle border border-dark border-3 hover-clickable" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img th:src="@{'/assets/img/avatar/' + ${user.avatar}}" id="avatar-pic" height="75" width="75"
+                             class="m-0 avatar dropdown-toggle rounded-circle border border-dark border-3 hover-clickable"
+                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <div class="dropdown-menu dropdown-menu-end me-1 mt-4">
-                            <button class="dropdown-item" data-toggle="modal" data-target="#avatarModal">Trocar Avatar</button>
+                            <button class="dropdown-item" data-toggle="modal" data-target="#avatarModal">Trocar Avatar
+                            </button>
                             <hr class="dropdown-divider">
                             <a href="/logout" class="dropdown-item">Logout</a>
                         </div>
@@ -43,7 +49,8 @@
             </div>
 
             <!-- Modal para trocar avatar -->
-            <div class="modal fade" id="avatarModal" tabindex="-1" role="dialog" aria-labelledby="avatarModalLabel" aria-hidden="true">
+            <div class="modal fade" id="avatarModal" tabindex="-1" role="dialog" aria-labelledby="avatarModalLabel"
+                 aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -55,7 +62,9 @@
                         <div class="modal-body">
                             <div class="d-flex justify-content-center flex-row gap-3 flex-wrap">
                                 <div th:each="imagem : ${imagesName}">
-                                    <img th:src="@{'/assets/img/avatar/' + ${imagem}}" class="avatarSelect border rounded-circle border-3 border-primary hover-clickable" height="75" width="75">
+                                    <img th:src="@{'/assets/img/avatar/' + ${imagem}}"
+                                         class="avatarSelect border rounded-circle border-3 border-primary hover-clickable"
+                                         height="75" width="75">
                                 </div>
                             </div>
                         </div>
@@ -66,35 +75,39 @@
                     </div>
                 </div>
             </div>
-
-        </div>
         </div>
     </header>
 
-    <div class="instagram-card">
-        <div class="instagram-card-header">
-            <img src="assets/img/avatar/Avatar12.jpg" class="instagram-card-user-image"/>
-            <a class="instagram-card-user-name" href="https://www.instagram.com/pedlo09/">pedlo09</a>
-            <div class="instagram-card-time">58 min</div>
-        </div>
-
-        <div class="intagram-card-image mt-5">
-            <img src="assets/img/slider/image3.jpg" width="100%" height="auto"/>
-        </div>
-
-        <div class="instagram-card-content">
-            <p class="likes">18.068 likes</p>
-            <p><a class="instagram-card-content-user" href="https://www.instagram.com/pedlo09/">pedlo09</a>
-                Fico feliz em compartilhar minha primeira arte com vcs <3.
-                <a class="hashtag" href="https://www.instagram.com/explore/tags/visitkemi/">#visitkemi</a></p>
+    <!-- Posts -->
+    <div class="posts d-flex flex-column gap-3">
+        <div th:each="post : ${posts}">
+            <div class="instagram-card card">
+                <div class="instagram-card-header">
+                    <img th:if="${post.userAvatar()} != null" th:src="@{'/assets/img/avatar/' + ${post.userAvatar()}}"
+                         class="instagram-card-user-image"/>
+                    <img th:if="${post.userAvatar()} == null" src="assets/img/user-solid.svg"
+                         class="instagram-card-user-image"/>
+                    <span th:text="${post.userName()}" class="instagram-card-user-name"></span>
+                </div>
+                <div class="instagram-card-image mt-5">
+                    <img th:src="${post.file()}" width="100%" height="auto"/>
+                </div>
+                <div class="instagram-card-content">
+                    <p th:if="${post.description()} != null" th:text="${post.description()}"></p>
+                </div>
+            </div>
         </div>
     </div>
 
-    <button type="button" class="btn btn-circle btn-primary btn-lg rounded-circle" data-toggle="modal" data-target="#PostModal">
+    <!-- Botão para criar Post -->
+    <button type="button" class="btn btn-circle btn-primary btn-lg rounded-circle" data-toggle="modal"
+            data-target="#PostModal">
         <i class="fa-solid fa-plus rounded-circle"></i>
     </button>
-    <!-- Modal -->
-    <div class="modal fade" id="PostModal" tabindex="-1" role="dialog" aria-labelledby="TituloModalCentralizado" aria-hidden="true">
+
+    <!-- Modal do Post -->
+    <div class="modal fade" id="PostModal" tabindex="-1" role="dialog" aria-labelledby="TituloModalCentralizado"
+         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -103,82 +116,86 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="/api/posts/create" method="Post">
+                <form action="/create-post" method="Post">
+                    <input name="userId" type="text" th:value="${user.id}" style="display: none"/>
                     <div class="modal-body">
-                            <img id="frame" src="" width="100%" height="auto" class="rounded mx-auto d-block"/>
-                            <div class="form-group">
-                                <label for="imgURL" class="col-form-label">Escolha URL:</label>
-                                <input type="url" class="form-control" id="imgURL" placeholder="http://www.imgJPG.com"/>
+                        <img id="frame" src="" width="100%" height="auto" class="rounded mx-auto d-block"/>
+                        <div class="form-group">
+                            <label for="message-text" class="col-form-label">Descrição:</label>
+                            <textarea name="description" class="form-control" id="message-text"></textarea>
 
-                                <label for="message-text" class="col-form-label">Descrição:</label>
-                                <textarea class="form-control" id="message-text"></textarea>
-                            </div>
+                            <label for="imgURL" class="col-form-label">Escolha URL:</label>
+                            <input name="file" type="url" class="form-control" id="imgURL"
+                                   placeholder="http://www.imgJPG.com"/>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                        <button type="submit" class="btn btn-primary" >Publicar</button>
+                        <button type="submit" class="btn btn-primary">Publicar</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
+</div>
 
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-    <script src="assets/font-awesome/js/all.min.js"></script>
-    <script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+<script src="assets/font-awesome/js/all.min.js"></script>
+<script>
+    var imgs = document.querySelectorAll(".avatarSelect")
+    var imgSelected;
 
+    imgs.forEach(img =>
+        img.addEventListener("click", () => {
+            imgSelected = img.src.split("/")
+            imgSelected = imgSelected[imgSelected.length - 1]
 
+            img.classList.add("border-dark")
+            img.classList.remove("border-primary")
 
-        var imgs = document.querySelectorAll(".avatarSelect")
-        var imgSelected;
-
-        imgs.forEach(img =>
-            img.addEventListener("click", () => {
-                imgSelected = img.src.split("/")
-                imgSelected = imgSelected[imgSelected.length - 1]
-
-                img.classList.add("border-dark")
-                img.classList.remove("border-primary")
-
-                imgs.forEach(imgNonSelected => {
-                    if(imgNonSelected != img) {
-                        imgNonSelected.classList.remove("border-dark")
-                    }
-                })
-            })
-        )
-
-        document.getElementById("sendAvatar").addEventListener(
-            "click", () => {
-                if(imgSelected) {
-                    let host =
-                        window.location.href.startsWith("https") ?
-                            `https://${window.location.host}` :
-                            `http://${window.location.host}`
-                    fetch(`${host}/change-avatar`, {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json",
-                        },
-                        body: JSON.stringify({ "avatar": imgSelected.toString() })
-                    })
-                        .then(response => {
-                            if(response.ok) {
-                                location.reload()
-                            }
-                        })
+            imgs.forEach(imgNonSelected => {
+                if (imgNonSelected != img) {
+                    imgNonSelected.classList.remove("border-dark")
                 }
+            })
+        })
+    )
+
+    document.getElementById("sendAvatar").addEventListener(
+        "click", () => {
+            if (imgSelected) {
+                let host =
+                    window.location.href.startsWith("https") ?
+                        `https://${window.location.host}` :
+                        `http://${window.location.host}`
+                fetch(`${host}/change-avatar`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({"avatar": imgSelected.toString()})
+                })
+                    .then(response => {
+                        if (response.ok) {
+                            location.reload()
+                        }
+                    })
             }
-        )
-        function preview() {
-            frame.src=URL.createObjectURL(event.target.files[0]);
         }
+    )
 
-    </script>
-    <script>
+    function preview() {
+        frame.src = URL.createObjectURL(event.target.files[0]);
+    }
 
-    </script>
+</script>
 </body>
 </html>

@@ -1,5 +1,10 @@
 body, html {
     max-width: 100vw !important;
+    height: 100vh;
+}
+
+.site {
+    padding: 10px;
 }
 
 p, h1, h2, h3, h4, h5, h6 {
@@ -151,10 +156,6 @@ hr {
     border-width: 2px;
 }
 
-html, body {
-    height: 100% !important;
-}
-
 .background-img {
     position: absolute;
     height: 100%;
@@ -163,6 +164,7 @@ html, body {
     object-fit: cover;
     filter: brightness(50%)
 }
+
 .btn-circle {
      z-index: 10;
      position: fixed !important;
@@ -170,10 +172,13 @@ html, body {
      right: 20px !important;
      border-radius: 50% !important;
 }
+
+.posts {
+    margin: 20px 0;
+}
+
 .instagram-card{
 	background: #ffffff;
-	border: 1px solid #000000;
-	border-radius: 3px;
 	width: 100%;
 	max-width: 600px;
 	margin: auto;
@@ -185,6 +190,7 @@ html, body {
 }
 
 .instagram-card-user-image{
+    border: solid 2px black;
 	border-radius: 50%;
 	width: 40px;
 	height: 40px;
@@ -241,9 +247,7 @@ hr{
   border-bottom: 1px solid #ccc;
   margin-top: 30px;
   margin-bottom: 0px;
-
 }
-
 
 .footer-action-icons{
   font-size: 16px;

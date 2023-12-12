@@ -13,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -131,7 +132,6 @@ public class WebController {
     @PostMapping("/change-avatar")
     public ResponseEntity changeAvatar(@RequestBody AvatarDTO avatar, HttpSession httpSession) {
         UserDTO oldUserDTO = (UserDTO) httpSession.getAttribute("user");
-        ModelAndView mv = new ModelAndView();
 
         ResponseEntity responseEntity = apiUserController.changeAvatar(avatar, httpSession);
 
@@ -146,10 +146,10 @@ public class WebController {
     }
 
     @PostMapping("/create-post")
-    public String createPost(@RequestBody PostCreateDTO postCreateDTO, HttpSession httpSession) {
-        apiPostController.createPost(postCreateDTO);
+    public String createPost(@ModelAttribute PostCreateDTO postCreateDTO) {
+        ResponseEntity responseEntity = apiPostController.createPost(postCreateDTO);
 
-        return "home";
+        return "redirect:/home";
     }
 
     private List<String> getAvatarsName() throws IOException {

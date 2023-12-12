@@ -34,7 +34,7 @@ public class APIUserController {
 
     @GetMapping("/email-used")
     public boolean verifyEmailUsed(@RequestParam String email) {
-        return userService.findUserByEmail(email) != null;
+        return userService.findUserByEmail(email).isPresent();
     }
 
     @PostMapping("/login")
@@ -65,7 +65,7 @@ public class APIUserController {
     @PostMapping("/registry")
     public ResponseEntity register(@RequestBody @Valid RegisterDTO data, HttpSession httpSession) {
         try {
-            if(this.userService.findUserByEmail(data.email()) != null)
+            if(this.userService.findUserByEmail(data.email()).isPresent())
                 return ResponseEntity.status(HttpStatus.CONFLICT).body("Email is already used");
 
             String encryptedPassword = new BCryptPasswordEncoder().encode(data.password());
@@ -91,6 +91,7 @@ public class APIUserController {
         UserDTO userDTO = (UserDTO) httpSession.getAttribute("user");
         if(userDTO == null) return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("User not found");
         String email = tokenService.validateToken(userDTO.token());
+
 
         if(email == "") {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid Token");

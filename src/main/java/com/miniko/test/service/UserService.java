@@ -51,10 +51,13 @@ public class UserService implements UserDetailsService {
 
         if (existingUser.isPresent()) {
             User user = existingUser.get();
+            System.out.println(user.getId());
             user.setName(updatedUser.getName());
             user.setEmail(updatedUser.getEmail());
             user.setPassword(updatedUser.getPassword());
             user.setAvatar(updatedUser.getAvatar());
+
+            userRepository.save(user);
         }
     }
 
@@ -62,11 +65,8 @@ public class UserService implements UserDetailsService {
     public void deleteUser(String id) {
         Optional<User> existingUser = userRepository.findById(id);
 
-        if (existingUser.isPresent()) {
-            userRepository.delete(existingUser.get());
-        }
+        existingUser.ifPresent(userRepository::delete);
     }
-
 
     //Retorna uma conta por seu id
     public Optional<User> findUserById(String id) {

@@ -1,6 +1,7 @@
 package com.miniko.test.entities.post;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
 
 import java.util.Date;
 
@@ -18,6 +19,7 @@ public class Post {
 
     private Date date;
 
+    @Size(min = 0, max = 99999)
     private String file_link;
 
     public Post() {
