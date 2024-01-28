@@ -4,7 +4,7 @@
 </h1>
 
 <h2 align="center">
-  <img src="https://img.freepik.com/vetores-premium/fundo-branco-de-tecnologia-de-internet-00702_660340-7.jpg"/>
+  <img src="./gif.gif"/>
 </h2>
 
 # Índice 
