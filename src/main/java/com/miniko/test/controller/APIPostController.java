@@ -16,7 +16,6 @@ import java.util.Optional;
 @RestController
 @RequestMapping("api/posts")
 public class APIPostController {
-
     private final PostService postService;
     private final UserService userService;
 

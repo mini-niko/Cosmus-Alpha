@@ -1,5 +1,6 @@
 package com.miniko.test.controller;
 
+import com.miniko.test.entities.post.Post;
 import com.miniko.test.entities.post.PostCreateDTO;
 import com.miniko.test.entities.post.PostViewDTO;
 import com.miniko.test.entities.user.*;
@@ -75,14 +76,21 @@ public class WebController {
     @GetMapping("/home")
     public ModelAndView home(HttpSession httpSession) throws IOException {
         ModelAndView mv = new ModelAndView();
-        mv.setViewName("home");
-        mv.addObject("user", httpSession.getAttribute("user"));
+        UserDTO user = (UserDTO) httpSession.getAttribute("user");
 
-        List<String> images = this.getAvatarsName();
-        List<PostViewDTO> postsDTO = postService.getAllPostsViewDTO();
+        if (user != null) {
+            mv.setViewName("home");
+            mv.addObject("user", httpSession.getAttribute("user"));
 
-        mv.addObject("posts", postsDTO);
-        mv.addObject("imagesName", images);
+            List<String> images = this.getAvatarsName();
+            List<PostViewDTO> postsViewDTO = postService.getAllPostsViewDTO();
+
+            mv.addObject("posts", postsViewDTO);
+            mv.addObject("imagesName", images);
+        }
+        else {
+            mv.setViewName("redirect:/login");
+        }
 
         return mv;
     }

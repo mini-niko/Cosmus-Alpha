@@ -20674,7 +20674,6 @@ body .bi:before, [class^=bi-]:before, [class*=" bi-"]:before {
 
 .card {
     margin-bottom: 0;
-    border: none;
     box-shadow: 5px 5px #141414;
     border-radius: 8px;
     border: 2px solid #141414

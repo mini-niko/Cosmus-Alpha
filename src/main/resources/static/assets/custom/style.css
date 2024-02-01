@@ -185,6 +185,9 @@ hr {
 }
 
 .instagram-card-header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 	padding: 20px;
 	height: 40px;
 }
@@ -195,6 +198,21 @@ hr {
 	width: 40px;
 	height: 40px;
 	vertical-align: middle;
+}
+
+.instagram-card-image {
+    border: 2px solid black;
+    background-color: #0b0b0b;
+    border-right: none;
+    border-left: none;
+    display: flex;
+    justify-content: center;
+}
+
+.instagram-card-image > img {
+    max-height: 400px;
+    /*noinspection CssInvalidPropertyValue*/
+    max-width: fit-content;
 }
 
 .instagram-card-time{
@@ -208,7 +226,7 @@ hr {
 .instagram-card-user-name{
 	margin-left:20px;
 	font-weight:bold;
-  color: #262626;
+    color: #262626;
 }
 
 .instagram-card-content{

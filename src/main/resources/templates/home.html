@@ -82,14 +82,17 @@
     <div class="posts d-flex flex-column gap-3">
         <div th:each="post : ${posts}">
             <div class="instagram-card card">
-                <div class="instagram-card-header">
-                    <img th:if="${post.userAvatar()} != null" th:src="@{'/assets/img/avatar/' + ${post.userAvatar()}}"
-                         class="instagram-card-user-image"/>
-                    <img th:if="${post.userAvatar()} == null" src="assets/img/user-solid.svg"
-                         class="instagram-card-user-image"/>
-                    <span th:text="${post.userName()}" class="instagram-card-user-name"></span>
+                <div class="instagram-card-header my-3 p-0 px-3">
+                    <div class="instagram-card-header-user">
+                        <img th:if="${post.userAvatar()} != null" th:src="@{'/assets/img/avatar/' + ${post.userAvatar()}}"
+                             class="instagram-card-user-image"/>
+                        <img th:if="${post.userAvatar()} == null" src="assets/img/user-solid.svg"
+                             class="instagram-card-user-image"/>
+                        <span th:text="${post.userName()}" class="instagram-card-user-name"></span>
+                    </div>
+                    <span th:text="${post.date()}"></span>
                 </div>
-                <div class="instagram-card-image mt-5">
+                <div class="instagram-card-image">
                     <img th:src="${post.file()}" width="100%" height="auto"/>
                 </div>
                 <div class="instagram-card-content">
