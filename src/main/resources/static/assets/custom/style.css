@@ -139,15 +139,19 @@ p, h1, h2, h3, h4, h5, h6 {
     cursor: pointer;
 }
 
-.card {
+.card, .dropdown-menu {
     border-radius: 0;
     border: 3px solid black;
     box-shadow: 5px 5px black;
 }
 
-.dropdown-menu, .modal-content, .btn, input {
+.dropdown-menu {
+    font-weight: 700;
+}
+
+.modal-content, .btn, input {
     border-radius: 0 !important;
-    border-width: 2px !important;
+    border-width: 3px !important;
     box-shadow: 2px 2px black;
 }
 
@@ -198,6 +202,7 @@ hr {
 	width: 40px;
 	height: 40px;
 	vertical-align: middle;
+    box-shadow: 2px 2px black;
 }
 
 .instagram-card-image {
@@ -224,7 +229,7 @@ hr {
 }
 
 .instagram-card-user-name{
-	margin-left:20px;
+	margin-left: 10px;
 	font-weight:bold;
     color: #262626;
 }

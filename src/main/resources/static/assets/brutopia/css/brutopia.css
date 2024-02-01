@@ -3391,7 +3391,7 @@ textarea.form-control-lg {
     --bs-dropdown-border-radius: 8px;
     --bs-dropdown-border-width: 0;
     --bs-dropdown-inner-border-radius: 8px;
-    --bs-dropdown-divider-bg: rgb(189, 199, 209);
+    --bs-dropdown-divider-bg: black;
     --bs-dropdown-divider-margin-y: .5rem;
     --bs-dropdown-box-shadow: 1px 4px 15px #f4f5f9;
     --bs-dropdown-link-color: #212529;
@@ -3635,7 +3635,7 @@ textarea.form-control-lg {
     height: 0;
     margin: var(--bs-dropdown-divider-margin-y) 0;
     overflow: hidden;
-    border-top: 1px solid var(--bs-dropdown-divider-bg);
+    border-top: 2px solid var(--bs-dropdown-divider-bg);
     opacity: 1
 }
 
@@ -20437,7 +20437,8 @@ body .bi:before, [class^=bi-]:before, [class*=" bi-"]:before {
     border-radius: 4px;
     text-align: center;
     vertical-align: middle;
-    position: relative
+    position: relative;
+    box-shadow: 3px 3px black;
 }
 
 .avatar .avatar-content {
