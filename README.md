@@ -8,7 +8,7 @@
 </div>
 
 <h3 align="center">
-  ⚠️ATENÇÃO⚠️<br/>O site não possui servidor público no momento. Em breve, isso será adicionado.
+  ⚠️ATENÇÃO⚠️<br/>O sistema do site será refatorado.
 </h3>
 
 # Índice 
