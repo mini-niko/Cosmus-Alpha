@@ -8,7 +8,7 @@
 </div>
 
 <h3 align="center">
-  ⚠️ATENÇÃO⚠️<br/>O sistema atual foi descontinuado. Ele está sendo desenvolvido no repositório [cosmus-art](https://github.com/mini-niko/cosmus-art).
+  ⚠️ATENÇÃO⚠️<br/>O sistema atual foi descontinuado. Ele está sendo desenvolvido no repositório <a href="https://github.com/mini-niko/cosmus-art" >cosmus-art</a>.
 </h3>
 
 # Índice 
