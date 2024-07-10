@@ -1,6 +1,6 @@
 <h1 align="center">
-  Cosmus <br/>
-  <img loading="lazy" src="http://img.shields.io/static/v1?label=STATUS&message=EM%20DESENVOLVIMENTO&color=GREEN&style=for-the-badge"/>
+  Cosmus (Alpha) <br/>
+  <img loading="lazy" src="http://img.shields.io/static/v1?label=STATUS&message=DESCONTINUADO&color=RED&style=for-the-badge"/>
 </h1>
 
 <div align="center">
@@ -8,7 +8,7 @@
 </div>
 
 <h3 align="center">
-  ⚠️ATENÇÃO⚠️<br/>O sistema do site será refatorado.
+  ⚠️ATENÇÃO⚠️<br/>O sistema atual foi descontinuado. Ele está sendo desenvolvido no repositório [cosmus-art](https://github.com/mini-niko/cosmus-art).
 </h3>
 
 # Índice 
