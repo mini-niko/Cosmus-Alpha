@@ -1,6 +1,6 @@
 <h1 align="center">
   Cosmus (Alpha) <br/>
-  <img loading="lazy" src="http://img.shields.io/static/v1?label=STATUS&message=DESCONTINUADO&color=RED&style=for-the-badge"/>
+  <img loading="lazy" src="http://img.shields.io/static/v1?label=STATUS&message=DESCONTINUADO&color=FF0000&style=for-the-badge"/>
 </h1>
 
 <div align="center">
