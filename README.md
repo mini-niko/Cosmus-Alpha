@@ -14,6 +14,7 @@
 # Índice 
 
 * [Sobre](#sobre)
+* [Como instalar](#como-instalar)
 * [Tecnologias utilizadas](#tecnologias-utilizadas)
 * [Features](#features)
 * [Autores](#autores)
@@ -22,6 +23,9 @@
 # Sobre
 
 <p>O Cosmus é um projeto independente, iniciado em 2023, no curso Jovem Programador do SENAC, e que possui a proposta de tornar a arte mais visível para as pessoas. Funciona de maneira simples, basta criar uma conta ou entrar com uma existente e começar a postar suas diversas artes!</p>
+
+# Como Instalar
+No momento, estou trabalhando para dockerizar o projeto.
 
 # Tecnologias Utilizadas
 
