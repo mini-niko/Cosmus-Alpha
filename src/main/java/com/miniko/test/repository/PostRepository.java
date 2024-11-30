@@ -15,6 +15,6 @@ public interface PostRepository extends JpaRepository<Post, String> {
     List<Post> findByUserId(@Param("userId") Long userId);
 
     //Query em SQL para encontrar todos os posts, em formato de PostViewDTO
-    @Query(value = "SELECT new com.miniko.test.entities.post.PostViewDTO(u.name, u.avatar, p.file_link, p.description, DATE_FORMAT(p.date, '%d/%m/%Y às %H:%i')) FROM posts p LEFT JOIN users u ON p.user_id = u.id ORDER BY p.date DESC")
+    @Query(value = "SELECT new com.miniko.test.entities.post.PostViewDTO(u.name, u.avatar, p.file_link, p.description, FORMATDATETIME(p.date, 'dd/MM/yyyy ''às'' HH:mm')) FROM posts p LEFT JOIN users u ON p.user_id = u.id ORDER BY p.date DESC")
     List<PostViewDTO> getAllPostsViewDTO();
 }

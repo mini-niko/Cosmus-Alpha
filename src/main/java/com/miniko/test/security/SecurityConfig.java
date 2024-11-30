@@ -28,10 +28,10 @@ public class SecurityConfig {
                         session.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
                 )
                 .authorizeHttpRequests( authorize -> authorize
-                    .requestMatchers("login", "registry").permitAll()
-                    .requestMatchers("assets/**").permitAll()
-                    .requestMatchers("api/**").permitAll()
-                    .anyRequest().authenticated()
+                    // .requestMatchers("login", "registry").permitAll()
+                    // .requestMatchers("assets/**").permitAll()
+                    // .requestMatchers("api/**").permitAll()
+                    .anyRequest().permitAll()
                 )
                 .formLogin(form -> form
                     .loginPage("/")
