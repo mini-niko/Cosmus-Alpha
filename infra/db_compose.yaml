@@ -1,0 +1,12 @@
+services:
+  db:
+    image: postgres:17.2-alpine3.20
+    container_name: postgres-db
+    ports:
+      - 5432:5432
+    expose:
+      - 5432
+    env_file:
+      - ../.env
+    volumes:
+      - /app/data

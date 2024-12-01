@@ -1,0 +1,17 @@
+services:
+  server:
+    build: ../
+    container_name: cosmus-server
+    ports:
+      - 8080:8080
+    expose:
+      - 8080
+    env_file:
+      - ../.env
+    environment:
+      - POSTGRES_HOST=postgres-db
+
+  db:
+    extends:
+      file: db_compose.yaml
+      service: db

@@ -45,7 +45,7 @@
 ---
 2- Após isso, você deve dar o seguinte comando do docker para buildar e levantar o projeto:
   ```
-  docker compose up
+  docker compose -f infra/compose.yaml up -d
   ```
 
 3- Assim que o docker buildar e levantar o projeto, ele estará disponível localmente na porta 8080.
